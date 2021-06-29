@@ -1,4 +1,4 @@
-## 框架安装
+## windows10环境使用electron
 
 为你的新Electron应用创建一个新的空文件夹。 打开你的命令行工具，然后从该文件夹运行`npm init`
 
@@ -108,4 +108,4 @@ electron_mirror="https://npm.taobao.org/mirrors/electron/"
 
 nodeIntergration保证renderer.js可以使用require语句
 
-enableRemoteModule保证renderer.js可以可以正常require('electron').remote，**此选项默认关闭且网上很多资料没有提到**
+enableRemoteModule保证renderer.js可以可以正常require('electron').remote，此选项默认关闭且网上很多资料没有提到

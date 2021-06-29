@@ -1,5 +1,16 @@
 ## CGI，FastCGI，PHP-CGI，PHP-FPM的关系
 
+- 文档更新时间：2020-08-17
+- CGI，FastCGI，PHP-CGI，PHP-FPM
+
+| 参考来源                                                     |
+| ------------------------------------------------------------ |
+| [CGI、FastCGI和php-fpm概念和区别](https://blog.csdn.net/IT_10/article/details/92801153) |
+| [CGI、FastCGI和PHP-FPM关系详解](https://www.cnblogs.com/zzx-hjl/p/10583849.html) |
+| [简单了解下CGI、FastCGI和php-fpm的概念和区别和运行原理](https://www.cnblogs.com/wt645631686/p/8065103.html) |
+| [PHP中的SAPI是什么？如何实现？（图文）](https://www.php.cn/php-weizijiaocheng-410435.html) |
+| [Go 和 PHP 在运行的时候有什么区别和优势](https://learnku.com/articles/44432) |
+
 ### 问题背景
 
 想要了解CGI，FastCGI，PHP-CGI，PHP-FPM的关系，首先需要了解一些Web服务的基础知识。在Web服务中，WebServer一般指Apache、Nginx、Tomcat、IIS、Lighttpd等服务器，WebApplication一般指PHP、Java、.NET等应用程序。在整个网站架构中，WebServer（Apache,Nginx）只是内容的分发者。

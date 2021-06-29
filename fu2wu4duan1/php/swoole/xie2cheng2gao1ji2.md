@@ -1,5 +1,8 @@
 ## 协程高级
 
+- 文档更新日期：2020-12-04
+- swoole-v4.4.23
+
 ### 系统API
 
 Coroutine\System，系统相关API的协程封装。此模块在v4.4.6正式版本后可用。v4.4.6以前的版本，请使用Co短名或Swoole\Coroutine调用，Co::sleep或Swoole\Coroutine::sleep。v4.4.6及以后版本官方推荐使用Co\System::sleep或Swoole\Coroutine\System::sleep。(向下兼容，v4.4.6版本以前的写法也是可以的，无需修改)

@@ -1,5 +1,8 @@
 ## Swoole\Server
 
+- 文档更新日期：2020-12-03
+- swoole-v4.4.23
+
 Swoole\Server类是所有异步风格服务器的基类，Http\Server、WebSocket\Server、Redis\Server都继承于它。
 
 ### set()方法

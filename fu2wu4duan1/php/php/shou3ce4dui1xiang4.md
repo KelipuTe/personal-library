@@ -1,30 +1,14 @@
-## PHP手册--语言参考03
+## php手册--对象
 
 ### 类与对象
-
-#### 基本概念
-
-当一个方法在类定义内部被调用时，有一个可用的伪变量$this。$this是一个到主叫对象的引用（通常是该方法所从属的对象，但如果是从第二个对象静态调用时也可能是另一个对象）。
-
-要创建一个类的实例，必须使用new关键字。当创建新对象时该对象总是被赋值，除非该对象定义了构造函数并且在出错时抛出了一个异常。类应在被实例化之前定义（某些情况下则必须这样）。
 
 如果在new之后跟着的是一个包含有类名的字符串string，则该类的一个实例被创建。如果该类属于一个命名空间，则必须使用其完整名称。
 
 ```php
-class SimpleClass
-{
-    public $var;
-    
-    public function displayVar() {
-        echo $this->var;
-    }
-}
-
 $instance = new SimpleClass();
-// 也可以这样做
+//也可以这样做
 $className = 'SimpleClass';
 $instance = new $className();
-// new SimpleClass()
 ```
 
 PHP5.3.0引进了两个新方法来创建一个对象的实例。

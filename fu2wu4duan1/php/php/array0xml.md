@@ -1,4 +1,8 @@
-### 数组和XML的相互转换
+### php数组和xml文本相互转换
+
+- 文档更新日期：2020-12-22
+- "openlss/lib-array2xml":"1.0.0"
+- "verdant/xml2array":"dev-master"
 
 这个需求有现成的扩展可以使用，这里介绍三个使用过的扩展：openlss/lib-array2xml、verdant/xml2array和spatie/array-to-xml。这三个扩展都可以进行数组和XML的相互转换。
 
@@ -6,21 +10,21 @@
 
 ```shell
 #openlss/lib-array2xml直接安装
-$ composer require openlss/lib-array2xml
-#spatie/array-to-xml需要根据PHP版本指定扩展的版本
-$ composer require spatie/array-to-xml ^2.15.0
+> composer require openlss/lib-array2xml
 #verdant/xml2array只有开发版本
-$ composer require verdant/xml2array:dev-master
+> composer require verdant/xml2array:dev-master
+#spatie/array-to-xml需要根据PHP版本指定扩展的版本
+> composer require spatie/array-to-xml ^2.15.0
 ```
 
 ### 使用方式
 
 ```php
 $array = [
-    'Info' => [
-        'Telephone' => 13151515151,
-        'Email'     => '',
-    ]
+  'Info' => [
+    'Telephone' => 13151515151,
+    'Email'     => '',
+  ]
 ];
 ```
 

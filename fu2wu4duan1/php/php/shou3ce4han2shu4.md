@@ -1,4 +1,4 @@
-## PHP手册--语言参考02
+## php手册--函数
 
 ### 运算符
 
@@ -77,34 +77,6 @@ $a = 0; $c = 1; $b = $a ? $a : $c;
 ```
 
 ### 流程控制
-
-#### for
-
-下面这段代码可能执行很慢，因为每次循环时都会重新执行 count() 方法，计算一遍数组的长度。
-
-```php
-$people = array(
-    array('name' => 'Kalle', 'salt' => 856412),
-    array('name' => 'Pierre', 'salt' => 215863)
-);
-
-for ($i = 0; $i < count($people); ++$i) {
-    $people[$i]['salt'] = rand(000000, 999999);
-}
-```
-
-由于数组的长度始终不变，可以用一个中间变量来储存数组长度以优化而不是不停调用 count() 方法。下面这段代码 count() 方法只会被执行一次。
-
-```php
-$people = array(
-    array('name' => 'Kalle', 'salt' => 856412),
-    array('name' => 'Pierre', 'salt' => 215863)
-);
-
-for ($i = 0, $size = count($people); $i < $size; ++$i) {
-    $people[$i]['salt'] = rand(000000, 999999);
-}
-```
 
 #### foreach
 
