@@ -1,29 +1,32 @@
-## 安装和配置 Go
+## windows环境安装和配置Golang
 
 - 文档更新时间：2021-07-16
+- -windows10
 - go-1.15
 
-### windows10 环境
+### 安装
 
-#### 安装
-
-下载安装包：https://golang.google.cn/dl/。这里下载的是：go1.15.3.windows-amd64.msi。
+下载安装包：[https://golang.google.cn/dl/](https://golang.google.cn/dl/)。这里下载的是：go1.15.3.windows-amd64.msi。
 
 win10环境直接安装就行，这里安装目录选的是`E:\Go`。安装完成后在环境变量Path中添加`E:\Go\bin。`
 
-打开win10的powershell，输入命令`go version`，如果安装成功，则会输出go版本号。
+打开cmd，输入命令`go version`，如果安装成功，则会输出go版本号，输出如下。
 
-```
+```shell
+> go version
+
 go version go1.15.3 windows/amd64
 ```
 
-#### 环境信息
+### 环境信息
 
 `go env`命令输出当前go开发包的环境变量状态。
 
 `go env -w`命令用于设置go开发包的环境变量。
 
-```
+```shell
+> go env
+
 set GO111MODULE=on
 set GOARCH=amd64
 set GOBIN=

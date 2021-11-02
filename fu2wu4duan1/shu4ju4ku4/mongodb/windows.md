@@ -1,4 +1,4 @@
-## windows环境使用mongodb
+## windows环境安装和配置mongodb
 
 - 2021-10-21
 - windows10

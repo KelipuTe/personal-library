@@ -8,7 +8,7 @@
 
 安装beego
 
-```powershell
+```shell
 > go get github.com/beego/beego/v2
 
 go: downloading github.com/astaxie/beego v1.12.3
@@ -36,7 +36,7 @@ bee工具是一个为了协助快速开发beego项目而创建的项目。
 
 通过bee，可以很容易的进行beego项目的创建、热编译、开发、测试、和部署。
 
-```powershell
+```shell
 > go get github.com/beego/bee
 
 go: downloading github.com/beego/bee v1.12.3

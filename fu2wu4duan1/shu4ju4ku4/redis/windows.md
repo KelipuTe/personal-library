@@ -1,4 +1,4 @@
-## windows环境使用redis
+## windows环境安装和配置redis
 
 - 2020-06-29
 - windows10
