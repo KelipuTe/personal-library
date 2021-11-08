@@ -1,6 +1,6 @@
 ### php数组和xml文本相互转换
 
-- 文档更新日期：2020-12-22
+- 2020-12-22
 - "openlss/lib-array2xml":"1.0.0"
 - "verdant/xml2array":"dev-master"
 

@@ -1,6 +1,6 @@
 ## CGI，FastCGI，PHP-CGI，PHP-FPM的关系
 
-- 文档更新时间：2020-08-17
+- 2020-08-17
 - CGI，FastCGI，PHP-CGI，PHP-FPM
 
 | 参考来源                                                     |

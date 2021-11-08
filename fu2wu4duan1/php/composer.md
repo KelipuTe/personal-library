@@ -2,7 +2,6 @@
 
 ### 切换镜像
 
-
 ```shell
 #全局切换镜像（这里用的是阿里云的镜像）
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
