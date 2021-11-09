@@ -1,18 +1,55 @@
+## 计算机科学速成课
+
 Crash Course Computer Science 计算机科学速成课
 
-Youtube原视频：
+Youtube原视频：https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulI
 
-https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulI
+bilibili：https://www.bilibili.com/video/BV1EW411u7th
 
-bilibili：
+CrashCourse字幕组：【计算机科学速成课】[40集全/精校] - Crash Course Computer Science
 
-CrashCourse字幕组
+翻译：https://github.com/1c7/crash-course-computer-science-chinese
 
-【计算机科学速成课】[40集全/精校] - Crash Course Computer Science
+### 大概总结一下计算机抽象产物
 
-https://www.bilibili.com/video/BV1EW411u7th
+| 组件 | 抽象产物 |
+| --- | --- |
+| 二极管、电路 | 与门、或门、非门 |
+| 与门、或门、非门 | 异或门 |
+| 与门、或门、非门、异或门 | 逻辑门 |
+| 异或门、与门 | 半加器 |
+| 半加器、或门 | 全加器 |
+| 半加器、全加器 | 加法器 |
+| 加法器 | 算术单元 |
+| 逻辑门 | 逻辑单元 |
+| 算术单元、逻辑单元 | 算术逻辑单元 |
+| 与门、或门、非门 | 锁存器 |
+| 锁存器、与门、或门 | 门锁 |
+| 门锁 | 寄存器 |
+| 寄存器、逻辑单元 | 控制单元 |
+| 算术逻辑单元、控制单元、寄存器 | 中央处理单元 |
+| 电路 | 多路复用器 |
+| 门锁、多路复用器 | 内存单元 |
+| 内存单元 | 可寻址内存 |
+| 可寻址内存 | 静态随机存取存储器 |
 
+从这里开始分两部分，硬件和软件。
 
-翻译：
+硬件：
 
-https://github.com/1c7/crash-course-computer-science-chinese
+| 组件 | 抽象产物 |
+| --- | --- |
+| 二极管、电路 | 集成电路 |
+
+软件：
+
+| 组件 | 抽象产物 |
+| --- | --- |
+| 中央处理单元、指令 | 程序 |
+| 程序、汇编器 | 汇编语言 |
+| 汇编语言、编译器 | 高级语言 |
+| 高级语言 | 面向过程编程、面向对象编程 |
+| 程序 | API、GUI |
+| API | 设备驱动程序、内存管理、文件系统 |
+| 设备驱动程序、内存管理、文件系统 | 操作系统 |
+| GUI | 命令行界面、图形操作界面 |
