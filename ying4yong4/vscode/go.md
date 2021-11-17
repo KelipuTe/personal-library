@@ -1,13 +1,23 @@
-## 用 Visual Studio Code 写 Go
+## 配置golang开发环境
 
-- 文档更新时间：2021-08-05
-- Visual Studio Code-1.58.2
+- 2021-11-17
+- VisualStudioCode1.62
 
 建议vscode的配置按工作区去配置，这样不同项目互不影响。
 
-### 工作区设置(settings.json)
+### 扩展
 
-在设置中点击，在settings.json中编辑，就会自动在.vscode目录，创建settings.json设置文件
+vscode的扩展主要就三个。
+
+- Go
+- CodeRunner
+- Chinese
+
+其他的工具是go提供的，vscode会在界面右下角用提示框提示安装。
+
+### 工作区设置（settings.json）
+
+在首选项的设置中点击`在settings.json中编辑`，就会自动在`.vscode`目录，创建settings.json设置文件。
 
 ```json
 {
@@ -29,4 +39,6 @@
 }
 ```
 
-普通的修改不会出现`"[go]": {}`这样的参数。这个参数，是在设置中，搜索了formatOnSave，然后点了，[go]标签下面的，在settings.json中编辑后出现的。
+普通的修改设置不会出现上面的`"[go]": {}`这个参数。
+
+这个参数是在首选项的设置中搜索formatOnSave，然后点击`[go]`标签下面的`在settings.json中编辑`后出现的。
