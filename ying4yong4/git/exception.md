@@ -1,39 +1,11 @@
-## Git配置
+## 一些异常和解决方案
 
-### 全局配置用户名和邮箱
-
-全局配置用户名和邮箱：
-```
-$ git config --global user.name 'xxx'
-$ git config --global user.email 'xxx@xxx.com'
-```
-
-这条命令会在`C:\Users\用户名\`创建一个**.gitconfig**文件用于保存配置。
-
-### 记住密码
-
-永久记住密码：
-```
-$ git config --global credential.helper store
-```
-
-临时记住密码：
-```
-$ git config –global credential.helper cache
-$ git config –global credential.helper 'cache –timeout=3600'
-```
-
-这两条命令会在`C:\Users\用户名\`创建一个**.gitconfig**文件用于保存配置。第一次提交任然需要输入用户名和密码。提交成功后，同一个用户就不需要再输入了。提交成功后会在`C:\Users\用户名\`创建一个**.git-credentials**文件用于保存密码。
-
-### 修改提交地址
-
-```
-$ git remote set-url origin 'xxx.git'
-```
+- 2021-11-17
+- git2.34.0
 
 ### 无法拉取代码
 
-git拉取代码卡住，并输出如下信息。
+使用`git pull`命令拉取代码时卡住，并输出如下信息：
 
 ```
 $ git pull
@@ -42,7 +14,9 @@ See "git help gc" for manual housekeeping.
 fatal: failed to run repack
 ```
 
-这是因为git本地仓库，如果长时间不进行清理，会导致本地dangling commit太多，从而造成拉取代码失败。可以使用`git fsck`命令查看本地的dangling commit。
+这是因为：git本地仓库如果长时间不进行清理，会导致本地dangling commit太多，从而造成拉取代码失败。
+
+可以使用`git fsck`命令查看本地的dangling commit。
 
 ```
 $ git fsck --lost-found
@@ -76,9 +50,3 @@ Writing objects: 100% (93146/93146), done.
 Total 93146 (delta 67637), reused 88951 (delta 64013), pack-reused 0
 Removing duplicate objects: 100% (256/256), done.
 ```
-
----
-
-| 参考来源                                                     |
-| ------------------------------------------------------------ |
-| [git长时间未清理无法拉取代码](https://blog.csdn.net/fenfeidexiatian/article/details/95308119) |

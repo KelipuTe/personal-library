@@ -1,53 +1,74 @@
-## windows环境安装和配置Golang
+## windows环境安装和配置golang
 
-- 文档更新时间：2021-07-16
-- -windows10
-- go-1.15
+- 2021-11-17
+- windows10
+- go-1.17
+
+### 下载
+
+去官方网站（https://golang.org/dl），下一个windows环境的安装包。
+
+本人这里下载到的安装包叫go1.17.3.windows-amd64.msi。
+
+上面的网站打不开就用这个网站（https://golang.google.cn/dl）。
 
 ### 安装
 
-下载安装包：[https://golang.google.cn/dl/](https://golang.google.cn/dl/)。这里下载的是：go1.15.3.windows-amd64.msi。
+运行安装包，选个合适的安装目录，然后一路下一步即可。
 
-win10环境直接安装就行，这里安装目录选的是`E:\Go`。安装完成后在环境变量Path中添加`E:\Go\bin。`
+### 配置
 
-打开cmd，输入命令`go version`，如果安装成功，则会输出go版本号，输出如下。
+- 在桌面右击我的电脑找到属性并点击。
+- 在界面左侧找到高级系统设置并点击。
+- 在界面下面找到环境变量并点击。
+- 在界面的系统变量列表中找到path变量并点击编辑。
+- 在path变量中添加go的bin目录。
+- 本人的这个目录是`C:\go\bin`。
 
-```shell
-> go version
+### go版本
 
-go version go1.15.3 windows/amd64
+#### go version
+
+可以在win10的命令行窗口（cmd黑窗口），使用`go version`命令查看go版本信息。
+
+如果上面的安装步骤成功，则会输出go版本号。
+
+```
+> C:\Users\Administrator>go version
+go version go1.17.3 windows/amd64
 ```
 
-### 环境信息
+### 环境配置
 
-`go env`命令输出当前go开发包的环境变量状态。
+- `go env`命令输出当前go开发包的环境变量状态。
+- `go env -w`命令用于设置go开发包的环境变量。
 
-`go env -w`命令用于设置go开发包的环境变量。
-
-```shell
-> go env
-
-set GO111MODULE=on
+```
+> C:\Users\Administrator>go env
+set GO111MODULE=
 set GOARCH=amd64
 set GOBIN=
 set GOCACHE=C:\Users\Administrator\AppData\Local\go-build
 set GOENV=C:\Users\Administrator\AppData\Roaming\go\env
 set GOEXE=.exe
+set GOEXPERIMENT=
 set GOFLAGS=
 set GOHOSTARCH=amd64
 set GOHOSTOS=windows
 set GOINSECURE=
-set GOMODCACHE=E:\Go\pkg\mod
+set GOMODCACHE=C:\Users\Administrator\go\pkg\mod
 set GONOPROXY=
 set GONOSUMDB=
 set GOOS=windows
-set GOPATH=E:\Go
+set GOPATH=C:\Users\Administrator\go
 set GOPRIVATE=
-set GOPROXY=https://goproxy.cn,direct
-set GOROOT=E:\Go
+set GOPROXY=https://proxy.golang.org,direct
+set GOROOT=c:\go
 set GOSUMDB=sum.golang.org
 set GOTMPDIR=
-set GOTOOLDIR=E:\Go\pkg\tool\windows_amd64
+set GOTOOLDIR=c:\go\pkg\tool\windows_amd64
+set GOVCS=
+set GOVERSION=go1.17.3
 set GCCGO=gccgo
 set AR=ar
 set CC=gcc
@@ -60,13 +81,18 @@ set CGO_CXXFLAGS=-g -O2
 set CGO_FFLAGS=-g -O2
 set CGO_LDFLAGS=-g -O2
 set PKG_CONFIG=pkg-config
-set GOGCCFLAGS=-m64 -mthreads -fmessage-length=0 -fdebug-prefix-map=C:\Users\ADMINI~1\AppData\Local\Temp\go-build582226306=/tmp/go-build -gno-record-gcc-switches
+set GOGCCFLAGS=-m64 -mthreads -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=C:\Users\ADMINI~1\AppData\Local\Temp\go-build1826627288=/tmp/go-build -gno-record-gcc-switches
 ```
 
 - GOARCH：处理器架构
 - GOROOT：go开发包的安装目录
 - GOPATH：当前工作目录，建议不要设置全局的GOPATH，而是随项目设置GOPATH
-- GOPROXY：代理，`https://goproxy.cn/`
+- GOPROXY：代理
 - GOPRIVATE：私有库，不走代理
 
-使用命令设置代理：`go env -w GOPROXY=https://goproxy.cn,direct`
+受网络影响，默认的代理可能连不上，可以换七牛云的代理。使用下面的命令设置代理：
+
+```
+> go env -w GO111MODULE=on
+> go env -w GOPROXY=https://goproxy.cn,direct
+```
