@@ -1,7 +1,7 @@
 ## 配置golang开发环境
 
 - 2021-11-17
-- VisualStudioCode1.62
+- VisualStudioCode-1.62
 
 建议vscode的配置按工作区去配置，这样不同项目互不影响。
 
@@ -17,7 +17,9 @@ vscode的扩展主要就三个。
 
 ### 工作区设置（settings.json）
 
-在首选项的设置中点击`在settings.json中编辑`，就会自动在`.vscode`目录，创建settings.json设置文件。
+菜单栏=>文件=>首选项=>设置。
+
+在设置中点击`在settings.json中编辑`，就会自动在`.vscode`目录，创建settings.json设置文件。
 
 ```json
 {
@@ -41,4 +43,4 @@ vscode的扩展主要就三个。
 
 普通的修改设置不会出现上面的`"[go]": {}`这个参数。
 
-这个参数是在首选项的设置中搜索formatOnSave，然后点击`[go]`标签下面的`在settings.json中编辑`后出现的。
+在设置中搜索formatOnSave，然后点击`[go]`标签下面的`在settings.json中编辑`，然后`"[go]": {}`参数就会出现。

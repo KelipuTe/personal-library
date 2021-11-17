@@ -1,8 +1,8 @@
 ## windows环境安装和配置redis
 
 - 2021-11-17
-- win10
-- redis5.0.14
+- windows-10
+- redis-5.0.14
 
 ### 下载
 

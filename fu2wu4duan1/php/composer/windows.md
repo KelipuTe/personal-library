@@ -1,9 +1,9 @@
 ## windows环境安装和配置composer
 
 - 2021-11-17
-- win10
-- php7.4
-- composer
+- windows-10
+- php-7.4
+- composer-2.1.12
 
 ### 下载
 

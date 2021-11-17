@@ -1,8 +1,8 @@
 ## 桌面管理系统
 
 - 2020-06-29
-- win10
-- redis3.2.1
+- windows-10
+- redis-3.2.1
 
 ### RedisDesktopManager
 
