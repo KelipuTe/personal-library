@@ -23,20 +23,20 @@ vscode的扩展主要就三个。
 
 ```json
 {
-  "editor.fontSize": 16,
-  "debug.console.fontSize": 16,
-  "terminal.integrated.fontSize": 16,
-  "go.formatTool": "goformat",
+  "editor.fontSize": 16, //编辑器字体大小
+  "debug.console.fontSize": 16, //调试控制台字体大小
+  "terminal.integrated.fontSize": 16, //控制台字体大小
+  "go.formatTool": "goformat", //go格式化工具
   "[go]": {
+    "editor.detectIndentation": false, //文件打开时，不基于文件内容强制检测和转换空格和制表符
     "editor.renderWhitespace": "boundary", //显示空格和制表符
-    "editor.detectIndentation": false, //不强制检测和转换
-    "editor.tabSize": 2, //制表符2个字符长度
+    "editor.tabSize": 2, //制表符占2个字符长度
     "editor.insertSpaces": true, //使用空格替代制表符
-    "editor.formatOnSave": true, //保存时格式化代码
+    "editor.formatOnSave": true, //保存文件时格式化代码
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      "source.organizeImports": true // 在保存时，自动调整import语句顺序按照字母顺序进行排列
     },
-    "editor.suggest.snippetsPreventQuickSuggestions": false
+    "editor.suggest.snippetsPreventQuickSuggestions": false //这个属性和代码提示有关
   }
 }
 ```
