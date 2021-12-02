@@ -8,10 +8,12 @@ readelf命令用于查看ELF格式的文件信息。
 
 - `-h`，显示elf文件开始的文件头信息。
 
-这里的a.out文件是和readelf.md本篇同目录下的file.md那篇里的hello.c编译得到的可执行文件。
+### 代码文件
+
+- ../code/hello.c
 
 ```
-> readelf -h a.out
+> readelf -h hello
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
   Class:                             ELF64

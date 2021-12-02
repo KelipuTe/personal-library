@@ -29,6 +29,10 @@ gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC)
 - `-o`：指定目标名称
 - `-S`：编译成为汇编代码
 
+### 代码文件
+
+- ../code/hello.c
+
 ### 编译
 
 源码文件->gcc处理->elf可执行文件。
@@ -39,8 +43,6 @@ gcc处理包括：预处理（预处理器）、编译（编译器）、汇编�
 - 编译得到汇编代码。
 - 汇编把汇编代码转化为机器指令。
 - 链接把各个模块连接起来组织成为可执行文件。
-
-这里的hello.c文件是和gcc.md本篇同目录下的file.md那篇里的hello.c源码文件。
 
 ```shell
 # 预处理
@@ -55,8 +57,8 @@ hello.s: ASCII text
 > gcc -c hello.s -o hello.o
 > file hello.o
 hello.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
-# 全套处理，a.out是一个可执行文件
-> gcc hello.c
-> file a.out
-a.out: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=a00dd2efbcbd8e23589373d89189b9785f0b7542, not stripped
+# 全套处理，hello是一个executable（可执行）文件
+> gcc hello.c -o hello
+> file hello
+hello: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=a00dd2efbcbd8e23589373d89189b9785f0b7542, not stripped
 ```
