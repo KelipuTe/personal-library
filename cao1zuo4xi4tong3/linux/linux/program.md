@@ -2,53 +2,70 @@
 
 - 2021-12-04
 
+### 程序是什么
+
 程序是存储在磁盘上的静态代码文件或已经编译好的可执行文件。
 
-### 代码文件
+### 代码和文件
 
-- ../code/hello.c
-- ../code/demo01.c
+- demo_c/demo/hello/hello.c
+- demo_c/demo/hello/hello.o
+- demo_c/demo/hello/hello
 
-### objdump -h hello.o
+### 编译
+
+c源码文件通过gcc处理会得到elf可执行文件。gcc处理包括：
+
+- 预处理（preprocessing），预处理器，预处理会增加一些代码。
+- 编译（compilation），编译器，编译得到汇编代码。
+- 汇编（assemble），汇编器，汇编把汇编代码转化为机器指令。
+- 链接（link），连接器，链接把各个模块连接起来组织成为可执行文件。
+
+在链接中，把函数的名字、变量的名字，都称为符号（symbol）
+
+### hello.o
+
+分别执行：
+
+```shell
+objdump -h hello.o
+objdump -s hello.o
+objdump -d hello.o
+```
+
+`objdump -h hello.o`
 
 ```
-> objdump -h hello.o
-
 hello.o:     file format elf64-x86-64
 
 Sections:
 Idx Name          Size      VMA               LMA               File off  Algn
-  0 .text         00000010  0000000000000000  0000000000000000  00000040  2**0
+  0 .text         00000015  0000000000000000  0000000000000000  00000040  2**0
                   CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
-  1 .data         00000000  0000000000000000  0000000000000000  00000050  2**0
+  1 .data         00000000  0000000000000000  0000000000000000  00000055  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000000  0000000000000000  0000000000000000  00000050  2**0
+  2 .bss          00000000  0000000000000000  0000000000000000  00000055  2**0
                   ALLOC
-  3 .rodata       0000000c  0000000000000000  0000000000000000  00000050  2**0
+  3 .rodata       0000000e  0000000000000000  0000000000000000  00000055  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  4 .comment      0000002e  0000000000000000  0000000000000000  0000005c  2**0
+  4 .comment      0000002e  0000000000000000  0000000000000000  00000063  2**0
                   CONTENTS, READONLY
-  5 .note.GNU-stack 00000000  0000000000000000  0000000000000000  0000008a  2**0
+  5 .note.GNU-stack 00000000  0000000000000000  0000000000000000  00000091  2**0
                   CONTENTS, READONLY
-  6 .eh_frame     00000038  0000000000000000  0000000000000000  00000090  2**3
+  6 .eh_frame     00000038  0000000000000000  0000000000000000  00000098  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
 ```
 
-- .text表示的是程序的代码段（程序指令），程序的代码保存在.text段里。
-- .data、.bss、.rodata是数据段（程序数据），.bss是未初始化数据段，.rodata是只读数据段。
-- 程序指令+程序数据构成可执行文件。
-
-### objdump -s -d hello.o
+`objdump -s hello.o`
 
 ```
-> objdump -s -d hello.o
-
 hello.o:     file format elf64-x86-64
 
 Contents of section .text:
- 0000 554889e5 bf000000 00e80000 00005dc3  UH............].
+ 0000 554889e5 bf000000 00e80000 0000b800  UH..............
+ 0010 0000005d c3                          ...].
 Contents of section .rodata:
- 0000 68656c6c 6f20776f 726c6400           hello world.
+ 0000 68656c6c 6f2c2077 6f726c64 0d00      hello, world..
 Contents of section .comment:
  0000 00474343 3a202847 4e552920 342e382e  .GCC: (GNU) 4.8.
  0010 35203230 31353036 32332028 52656420  5 20150623 (Red
@@ -56,8 +73,15 @@ Contents of section .comment:
 Contents of section .eh_frame:
  0000 14000000 00000000 017a5200 01781001  .........zR..x..
  0010 1b0c0708 90010000 1c000000 1c000000  ................
- 0020 00000000 10000000 00410e10 8602430d  .........A....C.
- 0030 064b0c07 08000000                    .K......
+ 0020 00000000 15000000 00410e10 8602430d  .........A....C.
+ 0030 06500c07 08000000                    .P......
+```
+
+`objdump -d hello.o`
+
+```
+hello.o:     file format elf64-x86-64
+
 
 Disassembly of section .text:
 
@@ -66,24 +90,24 @@ Disassembly of section .text:
    1:   48 89 e5                mov    %rsp,%rbp
    4:   bf 00 00 00 00          mov    $0x0,%edi
    9:   e8 00 00 00 00          callq  e <main+0xe>
-   e:   5d                      pop    %rbp
-   f:   c3                      retq
+   e:   b8 00 00 00 00          mov    $0x0,%eax
+  13:   5d                      pop    %rbp
+  14:   c3                      retq
 ```
 
-- elf64-x86-64v，表示文件的类型
-- Contents of section .text，每行从第二段开始，表示程序指令的内容（16进制机器指令），后面的`UH............].`是程序指令的ascii文本。
-- Disassembly of section .text，表示程序指令的内容，以及对应的汇编代码。
-- Contents of section .text，里的`554889e5`就对应，Disassembly of section .text，里前两行代码。`55（0x55）`反汇编后对应的汇编指令就是`push %rbp`。
+三个命令的结果都输出了`file format elf64-x86-64v`，这个表示文件类型。
 
-### objdump -s -d hello
+`objdump -h`的结果中：`.text`是代码段，它用于存储程序指令（程序的代码）。`.data`、`.bss`、`.rodata`是数据段，它们用于存储程序数据。`.bss`是未初始化数据段，`.rodata`是只读数据段。程序指令+程序数据构成可执行文件。
 
-c语言程序不是从`main`函数开始的，是从`_start`开始的。
+`objdump -s`的结果中：`Contents of section .text`，每行从第二段开始，表示程序指令的内容（16进制机器指令），后面的`UH............].`是程序指令的ascii文本。
 
-`_start`会调用`__libc_start_main`函数进行一些必要的初始化操作，然后再调`main`函数。
+`objdump -d`的结果中：`Disassembly of section .text`，表示程序指令的内容，以及对应的汇编代码。这里和`objdump -s`的结果对应。`Contents of section .text`里的`554889e5`就对应，`Disassembly of section .text`，里前两行代码`0:   55`和`1:   48 89 e5`。`55（0x55）`反汇编后对应的汇编指令就是`push %rbp`。
+
+### hello
+
+`objdump -h hello`
 
 ```
-> objdump -h hello
-
 hello:     file format elf64-x86-64
 
 Sections:
@@ -112,15 +136,15 @@ Idx Name          Size      VMA               LMA               File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
  11 .plt          00000040  0000000000400400  0000000000400400  00000400  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
- 12 .text         00000172  0000000000400440  0000000000400440  00000440  2**4
+ 12 .text         00000182  0000000000400440  0000000000400440  00000440  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
- 13 .fini         00000009  00000000004005b4  00000000004005b4  000005b4  2**2
+ 13 .fini         00000009  00000000004005c4  00000000004005c4  000005c4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
- 14 .rodata       0000001c  00000000004005c0  00000000004005c0  000005c0  2**3
+ 14 .rodata       0000001e  00000000004005d0  00000000004005d0  000005d0  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 15 .eh_frame_hdr 00000034  00000000004005dc  00000000004005dc  000005dc  2**2
+ 15 .eh_frame_hdr 00000034  00000000004005f0  00000000004005f0  000005f0  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 16 .eh_frame     000000f4  0000000000400610  0000000000400610  00000610  2**3
+ 16 .eh_frame     000000f4  0000000000400628  0000000000400628  00000628  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
  17 .init_array   00000008  0000000000600e10  0000000000600e10  00000e10  2**3
                   CONTENTS, ALLOC, LOAD, DATA
@@ -140,8 +164,11 @@ Idx Name          Size      VMA               LMA               File off  Algn
                   ALLOC
  25 .comment      0000002d  0000000000000000  0000000000000000  00001034  2**0
                   CONTENTS, READONLY
-[root@3d51fb631889 hello]# objdump -s -d hello
+```
 
+`objdump -s hello`
+
+```
 hello:     file format elf64-x86-64
 
 Contents of section .interp:
@@ -152,8 +179,8 @@ Contents of section .note.ABI-tag:
  400264 00000000 02000000 06000000 20000000  ............ ...
 Contents of section .note.gnu.build-id:
  400274 04000000 14000000 03000000 474e5500  ............GNU.
- 400284 a00dd2ef bcbd8e23 589373d8 9189b978  .......#X.s....x
- 400294 5f0b7542                             _.uB
+ 400284 0e0456c8 e39e443d 78cd485c f270373f  ..V...D=x.H\.p7?
+ 400294 b03d6fed                             .=o.
 Contents of section .gnu.hash:
  400298 01000000 01000000 01000000 00000000  ................
  4002a8 00000000 00000000 00000000           ............
@@ -193,7 +220,7 @@ Contents of section .plt:
  400430 ff25f20b 20006802 000000e9 c0ffffff  .%.. .h.........
 Contents of section .text:
  400440 31ed4989 d15e4889 e24883e4 f0505449  1.I..^H..H...PTI
- 400450 c7c0b005 400048c7 c1400540 0048c7c7  ....@.H..@.@.H..
+ 400450 c7c0c005 400048c7 c1500540 0048c7c7  ....@.H..P.@.H..
  400460 2d054000 e8b7ffff fff4660f 1f440000  -.@.......f..D..
  400470 b83f1060 0055482d 38106000 4883f80e  .?.`.UH-8.`.H...
  400480 4889e577 025dc3b8 00000000 4885c074  H..w.]......H..t
@@ -207,42 +234,43 @@ Contents of section .text:
  400500 48833d18 09200000 741eb800 00000048  H.=.. ..t......H
  400510 85c07414 55bf200e 60004889 e5ffd05d  ..t.U. .`.H....]
  400520 e97bffff ff0f1f00 e973ffff ff554889  .{.......s...UH.
- 400530 e5bfd005 4000e8d5 feffff5d c30f1f00  ....@......]....
- 400540 41574189 ff415649 89f64155 4989d541  AWA..AVI..AUI..A
- 400550 544c8d25 b8082000 55488d2d b8082000  TL.%.. .UH.-.. .
- 400560 534c29e5 31db48c1 fd034883 ec08e86d  SL).1.H...H....m
- 400570 feffff48 85ed741e 0f1f8400 00000000  ...H..t.........
- 400580 4c89ea4c 89f64489 ff41ff14 dc4883c3  L..L..D..A...H..
- 400590 014839eb 75ea4883 c4085b5d 415c415d  .H9.u.H...[]A\A]
- 4005a0 415e415f c390662e 0f1f8400 00000000  A^A_..f.........
- 4005b0 f3c3                                 ..
+ 400530 e5bfe005 4000e8d5 feffffb8 00000000  ....@...........
+ 400540 5dc3662e 0f1f8400 00000000 0f1f4000  ].f...........@.
+ 400550 41574189 ff415649 89f64155 4989d541  AWA..AVI..AUI..A
+ 400560 544c8d25 a8082000 55488d2d a8082000  TL.%.. .UH.-.. .
+ 400570 534c29e5 31db48c1 fd034883 ec08e85d  SL).1.H...H....]
+ 400580 feffff48 85ed741e 0f1f8400 00000000  ...H..t.........
+ 400590 4c89ea4c 89f64489 ff41ff14 dc4883c3  L..L..D..A...H..
+ 4005a0 014839eb 75ea4883 c4085b5d 415c415d  .H9.u.H...[]A\A]
+ 4005b0 415e415f c390662e 0f1f8400 00000000  A^A_..f.........
+ 4005c0 f3c3                                 ..
 Contents of section .fini:
- 4005b4 4883ec08 4883c408 c3                 H...H....
+ 4005c4 4883ec08 4883c408 c3                 H...H....
 Contents of section .rodata:
- 4005c0 01000200 00000000 00000000 00000000  ................
- 4005d0 68656c6c 6f20776f 726c6400           hello world.
+ 4005d0 01000200 00000000 00000000 00000000  ................
+ 4005e0 68656c6c 6f2c2077 6f726c64 0d00      hello, world..
 Contents of section .eh_frame_hdr:
- 4005dc 011b033b 30000000 05000000 24feffff  ...;0.......$...
- 4005ec 7c000000 64feffff 4c000000 51ffffff  |...d...L...Q...
- 4005fc a4000000 64ffffff c4000000 d4ffffff  ....d...........
- 40060c 0c010000                             ....
+ 4005f0 011b033b 34000000 05000000 10feffff  ...;4...........
+ 400600 80000000 50feffff 50000000 3dffffff  ....P...P...=...
+ 400610 a8000000 60ffffff c8000000 d0ffffff  ....`...........
+ 400620 10010000                             ....
 Contents of section .eh_frame:
- 400610 14000000 00000000 017a5200 01781001  .........zR..x..
- 400620 1b0c0708 90010710 14000000 1c000000  ................
- 400630 10feffff 2a000000 00000000 00000000  ....*...........
- 400640 14000000 00000000 017a5200 01781001  .........zR..x..
- 400650 1b0c0708 90010000 24000000 1c000000  ........$.......
- 400660 a0fdffff 40000000 000e1046 0e184a0f  ....@......F..J.
- 400670 0b770880 003f1a3b 2a332422 00000000  .w...?.;*3$"....
- 400680 1c000000 44000000 a5feffff 10000000  ....D...........
- 400690 00410e10 8602430d 064b0c07 08000000  .A....C..K......
- 4006a0 44000000 64000000 98feffff 65000000  D...d.......e...
- 4006b0 00420e10 8f02450e 188e0345 0e208d04  .B....E....E. ..
- 4006c0 450e288c 05480e30 8606480e 3883074d  E.(..H.0..H.8..M
- 4006d0 0e406c0e 38410e30 410e2842 0e20420e  .@l.8A.0A.(B. B.
- 4006e0 18420e10 420e0800 14000000 ac000000  .B..B...........
- 4006f0 c0feffff 02000000 00000000 00000000  ................
- 400700 00000000                             ....
+ 400628 14000000 00000000 017a5200 01781001  .........zR..x..
+ 400638 1b0c0708 90010710 14000000 1c000000  ................
+ 400648 f8fdffff 2a000000 00000000 00000000  ....*...........
+ 400658 14000000 00000000 017a5200 01781001  .........zR..x..
+ 400668 1b0c0708 90010000 24000000 1c000000  ........$.......
+ 400678 88fdffff 40000000 000e1046 0e184a0f  ....@......F..J.
+ 400688 0b770880 003f1a3b 2a332422 00000000  .w...?.;*3$"....
+ 400698 1c000000 44000000 8dfeffff 15000000  ....D...........
+ 4006a8 00410e10 8602430d 06500c07 08000000  .A....C..P......
+ 4006b8 44000000 64000000 90feffff 65000000  D...d.......e...
+ 4006c8 00420e10 8f02450e 188e0345 0e208d04  .B....E....E. ..
+ 4006d8 450e288c 05480e30 8606480e 3883074d  E.(..H.0..H.8..M
+ 4006e8 0e406c0e 38410e30 410e2842 0e20420e  .@l.8A.0A.(B. B.
+ 4006f8 18420e10 420e0800 14000000 ac000000  .B..B...........
+ 400708 b8feffff 02000000 00000000 00000000  ................
+ 400718 00000000                             ....
 Contents of section .init_array:
  600e10 00054000 00000000                    ..@.....
 Contents of section .fini_array:
@@ -252,7 +280,7 @@ Contents of section .jcr:
 Contents of section .dynamic:
  600e28 01000000 00000000 01000000 00000000  ................
  600e38 0c000000 00000000 e0034000 00000000  ..........@.....
- 600e48 0d000000 00000000 b4054000 00000000  ..........@.....
+ 600e48 0d000000 00000000 c4054000 00000000  ..........@.....
  600e58 19000000 00000000 100e6000 00000000  ..........`.....
  600e68 1b000000 00000000 08000000 00000000  ................
  600e78 1a000000 00000000 180e6000 00000000  ..........`.....
@@ -291,6 +319,13 @@ Contents of section .comment:
  0000 4743433a 2028474e 55292034 2e382e35  GCC: (GNU) 4.8.5
  0010 20323031 35303632 33202852 65642048   20150623 (Red H
  0020 61742034 2e382e35 2d343429 00        at 4.8.5-44).
+```
+
+`objdump -d hello`
+
+```
+hello:     file format elf64-x86-64
+
 
 Disassembly of section .init:
 
@@ -335,8 +370,8 @@ Disassembly of section .text:
   400449:       48 83 e4 f0             and    $0xfffffffffffffff0,%rsp
   40044d:       50                      push   %rax
   40044e:       54                      push   %rsp
-  40044f:       49 c7 c0 b0 05 40 00    mov    $0x4005b0,%r8
-  400456:       48 c7 c1 40 05 40 00    mov    $0x400540,%rcx
+  40044f:       49 c7 c0 c0 05 40 00    mov    $0x4005c0,%r8
+  400456:       48 c7 c1 50 05 40 00    mov    $0x400550,%rcx
   40045d:       48 c7 c7 2d 05 40 00    mov    $0x40052d,%rdi
   400464:       e8 b7 ff ff ff          callq  400420 <__libc_start_main@plt>
   400469:       f4                      hlt
@@ -411,148 +446,64 @@ Disassembly of section .text:
 000000000040052d <main>:
   40052d:       55                      push   %rbp
   40052e:       48 89 e5                mov    %rsp,%rbp
-  400531:       bf d0 05 40 00          mov    $0x4005d0,%edi
+  400531:       bf e0 05 40 00          mov    $0x4005e0,%edi
   400536:       e8 d5 fe ff ff          callq  400410 <puts@plt>
-  40053b:       5d                      pop    %rbp
-  40053c:       c3                      retq
-  40053d:       0f 1f 00                nopl   (%rax)
+  40053b:       b8 00 00 00 00          mov    $0x0,%eax
+  400540:       5d                      pop    %rbp
+  400541:       c3                      retq
+  400542:       66 2e 0f 1f 84 00 00    nopw   %cs:0x0(%rax,%rax,1)
+  400549:       00 00 00
+  40054c:       0f 1f 40 00             nopl   0x0(%rax)
 
-0000000000400540 <__libc_csu_init>:
-  400540:       41 57                   push   %r15
-  400542:       41 89 ff                mov    %edi,%r15d
-  400545:       41 56                   push   %r14
-  400547:       49 89 f6                mov    %rsi,%r14
-  40054a:       41 55                   push   %r13
-  40054c:       49 89 d5                mov    %rdx,%r13
-  40054f:       41 54                   push   %r12
-  400551:       4c 8d 25 b8 08 20 00    lea    0x2008b8(%rip),%r12        # 600e10 <__frame_dummy_init_array_entry>
-  400558:       55                      push   %rbp
-  400559:       48 8d 2d b8 08 20 00    lea    0x2008b8(%rip),%rbp        # 600e18 <__init_array_end>
-  400560:       53                      push   %rbx
-  400561:       4c 29 e5                sub    %r12,%rbp
-  400564:       31 db                   xor    %ebx,%ebx
-  400566:       48 c1 fd 03             sar    $0x3,%rbp
-  40056a:       48 83 ec 08             sub    $0x8,%rsp
-  40056e:       e8 6d fe ff ff          callq  4003e0 <_init>
-  400573:       48 85 ed                test   %rbp,%rbp
-  400576:       74 1e                   je     400596 <__libc_csu_init+0x56>
-  400578:       0f 1f 84 00 00 00 00    nopl   0x0(%rax,%rax,1)
-  40057f:       00
-  400580:       4c 89 ea                mov    %r13,%rdx
-  400583:       4c 89 f6                mov    %r14,%rsi
-  400586:       44 89 ff                mov    %r15d,%edi
-  400589:       41 ff 14 dc             callq  *(%r12,%rbx,8)
-  40058d:       48 83 c3 01             add    $0x1,%rbx
-  400591:       48 39 eb                cmp    %rbp,%rbx
-  400594:       75 ea                   jne    400580 <__libc_csu_init+0x40>
-  400596:       48 83 c4 08             add    $0x8,%rsp
-  40059a:       5b                      pop    %rbx
-  40059b:       5d                      pop    %rbp
-  40059c:       41 5c                   pop    %r12
-  40059e:       41 5d                   pop    %r13
-  4005a0:       41 5e                   pop    %r14
-  4005a2:       41 5f                   pop    %r15
-  4005a4:       c3                      retq
-  4005a5:       90                      nop
-  4005a6:       66 2e 0f 1f 84 00 00    nopw   %cs:0x0(%rax,%rax,1)
-  4005ad:       00 00 00
+0000000000400550 <__libc_csu_init>:
+  400550:       41 57                   push   %r15
+  400552:       41 89 ff                mov    %edi,%r15d
+  400555:       41 56                   push   %r14
+  400557:       49 89 f6                mov    %rsi,%r14
+  40055a:       41 55                   push   %r13
+  40055c:       49 89 d5                mov    %rdx,%r13
+  40055f:       41 54                   push   %r12
+  400561:       4c 8d 25 a8 08 20 00    lea    0x2008a8(%rip),%r12        # 600e10 <__frame_dummy_init_array_entry>
+  400568:       55                      push   %rbp
+  400569:       48 8d 2d a8 08 20 00    lea    0x2008a8(%rip),%rbp        # 600e18 <__init_array_end>
+  400570:       53                      push   %rbx
+  400571:       4c 29 e5                sub    %r12,%rbp
+  400574:       31 db                   xor    %ebx,%ebx
+  400576:       48 c1 fd 03             sar    $0x3,%rbp
+  40057a:       48 83 ec 08             sub    $0x8,%rsp
+  40057e:       e8 5d fe ff ff          callq  4003e0 <_init>
+  400583:       48 85 ed                test   %rbp,%rbp
+  400586:       74 1e                   je     4005a6 <__libc_csu_init+0x56>
+  400588:       0f 1f 84 00 00 00 00    nopl   0x0(%rax,%rax,1)
+  40058f:       00
+  400590:       4c 89 ea                mov    %r13,%rdx
+  400593:       4c 89 f6                mov    %r14,%rsi
+  400596:       44 89 ff                mov    %r15d,%edi
+  400599:       41 ff 14 dc             callq  *(%r12,%rbx,8)
+  40059d:       48 83 c3 01             add    $0x1,%rbx
+  4005a1:       48 39 eb                cmp    %rbp,%rbx
+  4005a4:       75 ea                   jne    400590 <__libc_csu_init+0x40>
+  4005a6:       48 83 c4 08             add    $0x8,%rsp
+  4005aa:       5b                      pop    %rbx
+  4005ab:       5d                      pop    %rbp
+  4005ac:       41 5c                   pop    %r12
+  4005ae:       41 5d                   pop    %r13
+  4005b0:       41 5e                   pop    %r14
+  4005b2:       41 5f                   pop    %r15
+  4005b4:       c3                      retq
+  4005b5:       90                      nop
+  4005b6:       66 2e 0f 1f 84 00 00    nopw   %cs:0x0(%rax,%rax,1)
+  4005bd:       00 00 00
 
-00000000004005b0 <__libc_csu_fini>:
-  4005b0:       f3 c3                   repz retq
+00000000004005c0 <__libc_csu_fini>:
+  4005c0:       f3 c3                   repz retq
 
 Disassembly of section .fini:
 
-00000000004005b4 <_fini>:
-  4005b4:       48 83 ec 08             sub    $0x8,%rsp
-  4005b8:       48 83 c4 08             add    $0x8,%rsp
-  4005bc:       c3                      retq
+00000000004005c4 <_fini>:
+  4005c4:       48 83 ec 08             sub    $0x8,%rsp
+  4005c8:       48 83 c4 08             add    $0x8,%rsp
+  4005cc:       c3                      retq
 ```
 
-### objdump -s -d demo01.o
-
-```
-> objdump -s -d demo01.o
-
-demo01.o:     file format elf64-x86-64
-
-Contents of section .text:
- 0000 554889e5 4883ec20 897dec8b 45ec8945  UH..H.. .}..E..E
- 0010 fc8b45fc 89c6bf00 000000b8 00000000  ..E.............
- 0020 e8000000 008b45fc c9c35548 89e58b05  ......E...UH....
- 0030 00000000 89c7e800 000000b8 00000000  ................
- 0040 5dc3                                 ].
-Contents of section .data:
- 0000 2c010000 0a000000                    ,.......
-Contents of section .rodata:
- 0000 25640d0a 00                          %d...
-Contents of section .comment:
- 0000 00474343 3a202847 4e552920 342e382e  .GCC: (GNU) 4.8.
- 0010 35203230 31353036 32332028 52656420  5 20150623 (Red
- 0020 48617420 342e382e 352d3434 2900      Hat 4.8.5-44).
-Contents of section .eh_frame:
- 0000 14000000 00000000 017a5200 01781001  .........zR..x..
- 0010 1b0c0708 90010000 1c000000 1c000000  ................
- 0020 00000000 2a000000 00410e10 8602430d  ....*....A....C.
- 0030 06650c07 08000000 1c000000 3c000000  .e..........<...
- 0040 00000000 18000000 00410e10 8602430d  .........A....C.
- 0050 06530c07 08000000                    .S......
-
-Disassembly of section .text:
-
-0000000000000000 <func1>:
-   0:   55                      push   %rbp
-   1:   48 89 e5                mov    %rsp,%rbp
-   4:   48 83 ec 20             sub    $0x20,%rsp
-   8:   89 7d ec                mov    %edi,-0x14(%rbp)
-   b:   8b 45 ec                mov    -0x14(%rbp),%eax
-   e:   89 45 fc                mov    %eax,-0x4(%rbp)
-  11:   8b 45 fc                mov    -0x4(%rbp),%eax
-  14:   89 c6                   mov    %eax,%esi
-  16:   bf 00 00 00 00          mov    $0x0,%edi
-  1b:   b8 00 00 00 00          mov    $0x0,%eax
-  20:   e8 00 00 00 00          callq  25 <func1+0x25>
-  25:   8b 45 fc                mov    -0x4(%rbp),%eax
-  28:   c9                      leaveq
-  29:   c3                      retq
-
-000000000000002a <main>:
-  2a:   55                      push   %rbp
-  2b:   48 89 e5                mov    %rsp,%rbp
-  2e:   8b 05 00 00 00 00       mov    0x0(%rip),%eax        # 34 <main+0xa>
-  34:   89 c7                   mov    %eax,%edi
-  36:   e8 00 00 00 00          callq  3b <main+0x11>
-  3b:   b8 00 00 00 00          mov    $0x0,%eax
-  40:   5d                      pop    %rbp
-  41:   c3                      retq
-```
-
-程序中的300和10在`.data`数据段中对应`2c010000`和`0a000000`。但是300的16进制是`0000012c`，10的16进制是`0000000a`，这里是反着存的。
-
-这是因为在内存中是使用小端字节序（little endian）存储的。小端字节序也成为主机字节序。16进制`0000012c`，左边是高位，右边是低位。内存是从低到高的，所以存储格式是把数据的低位放在内存低位上。
-
-可以通过readelf命令查看。在`Data`字段里可以看见`little endian`。
-
-```
-> readelf -h demo01.o
-ELF Header:
-  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
-  Class:                             ELF64
-  Data:                              2's complement, little endian
-  Version:                           1 (current)
-  OS/ABI:                            UNIX - System V
-  ABI Version:                       0
-  Type:                              REL (Relocatable file)
-  Machine:                           Advanced Micro Devices X86-64
-  Version:                           0x1
-  Entry point address:               0x0
-  Start of program headers:          0 (bytes into file)
-  Start of section headers:          960 (bytes into file)
-  Flags:                             0x0
-  Size of this header:               64 (bytes)
-  Size of program headers:           0 (bytes)
-  Number of program headers:         0
-  Size of section headers:           64 (bytes)
-  Number of section headers:         13
-  Section header string table index: 12
-```
-
+从上面三组结果可以看出，c语言程序不是从`main`函数开始的，是从`_start`函数开始的。`_start`函数会调用`__libc_start_main`函数进行一些必要的初始化操作，然后再调用`main`函数。

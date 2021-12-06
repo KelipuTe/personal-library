@@ -2,18 +2,19 @@
 
 - 2021-12-01
 
-readelf命令用于查看ELF格式的文件信息。
+readelf命令用于查看elf格式的文件信息。
 
 ## 参数
 
 - `-h`，显示elf文件开始的文件头信息。
 
-### 代码文件
+### 示例
 
-- ../code/hello.c
+文件：demo_c/demo/hello/hello
+
+`readelf -h hello`
 
 ```
-> readelf -h hello
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
   Class:                             ELF64
