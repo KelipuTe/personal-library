@@ -6,6 +6,13 @@
 
 程序启动就变成进程，直到其运行结束。程序是静态的，进程是动态的。
 
+### 进程的观察方式
+
+- ps命令
+- top命令
+- pstree命令
+- strace命令
+
 ### 代码和文件
 
 - demo_c/demo/hello/hello.c
@@ -15,21 +22,21 @@
 
 ### hello
 
-这里使用一个终端1运行，使用另一个终端2监控终端1。
-
-终端1可通过`echo $$`命令获取自身的进程号。终端2通过strace命令和终端1的进程号监控终端1。这里的1就是终端2的进程号，追踪到的内容输出到hello.log文件。
+这里使用一个终端1运行，使用另一个终端2监控终端1。终端1可通过`echo $$`命令获取自身的进程号。终端2通过strace命令和终端1的进程号监控终端1。
 
 ```shell
 strace -f -i -s 65535 -T -p 1 -o hello.log
 ```
 
-终端1运行hello程序，终端2在输出前两行之后，按ctrl+c终止监视。
+这里的1就是终端2的进程号，追踪到的内容输出到hello.log文件。
 
 ```
 strace: Process 1 attached
 strace: Process 79 attached
 ^Cstrace: Process 1 detached
 ```
+
+终端1运行hello程序，终端2在输出前两行之后，按ctrl+c终止监视，会输出第三行。
 
 ### hello.log
 
@@ -297,7 +304,9 @@ strace: Process 79 attached
 79    [00007f67fa886c37] execve("./hello", ["./hello"], 0x1e119e0 /* 9 vars */) = 0 <0.125500>
 ```
 
-进程79调用系统函数execve执行可执行文件hello。execve系统函数会加载可执行文件的`.text`（程序指令）和`.data`（程序数据）到当前进程，并覆盖当前进程。
+进程79调用系统函数execve执行可执行文件hello。
+
+execve系统函数会加载可执行文件的`.text`（程序指令）和`.data`（程序数据）到当前进程，并覆盖当前进程。
 
 `["./hello"]`是参数值。`0x1e119e0 /* 9 vars */`是环境参数值。在linux中，环境参数是供所有应用程序使用的公共数据。
 
@@ -307,7 +316,11 @@ strace: Process 79 attached
 
 加载hello程序所依赖的相关库文件`/lib64/libc.so.6`。其中`= 3`的3，是文件描述符，就是指当前进程在访问的文件，这个值一般大于等于0。
 
-`/lib64/libc.so.6`是共享目标文件，也叫共享库、运行库、动态库。用户程序，会调用运行库（CRT，C Runtime Library）。运行库封装了操作系统更底层的系统调用函数。Linux、Windows、Mac，这些系统它们的底层接口都是不一样的，并且比较原始且底层，直接使用比较复杂，所以要封装这些比较底层的系统调用。
+`/lib64/libc.so.6`是共享目标文件，也叫共享库、运行库、动态库。
+
+用户程序，会调用运行库（CRT，C Runtime Library）。运行库封装了操作系统更底层的系统调用函数。
+
+Linux、Windows、Mac，这些系统它们的底层接口都是不一样的，并且比较原始且底层，直接使用比较复杂，所以要封装这些比较底层的系统调用。
 
 ```
 79    [00007f0a08361a00] write(1, "hello, world\r\n", 14) = 14 <0.000094>
@@ -317,7 +330,9 @@ strace: Process 79 attached
 
 c语言的stdio.h头文件声明的printf函数的底层实现最终调用的就是系统函数write，而write的具体实现就在libc.so.6库里。
 
-系统调用是可以直接写在程序里的。参考代码`demo_c/demo/system_call_write/system_call_write.c`。系统函数write就是暴露出来的最底层的函数了，再往下就是驱动和硬件相关了。
+系统调用是可以直接写在程序里的。参考代码`demo_c/demo/system_call_write/system_call_write.c`。
+
+系统函数write就是暴露出来的最底层的函数了，再往下就是驱动和硬件相关了。
 
 ```
 79    [00007f0a08337c09] exit_group(0)  = ?

@@ -97,11 +97,22 @@ Disassembly of section .text:
 
 三个命令的结果都输出了`file format elf64-x86-64v`，这个表示文件类型。
 
-`objdump -h`的结果中：`.text`是代码段，它用于存储程序指令（程序的代码）。`.data`、`.bss`、`.rodata`是数据段，它们用于存储程序数据。`.bss`是未初始化数据段，`.rodata`是只读数据段。程序指令+程序数据构成可执行文件。
+`objdump -h`的结果中：
 
-`objdump -s`的结果中：`Contents of section .text`，每行从第二段开始，表示程序指令的内容（16进制机器指令），后面的`UH............].`是程序指令的ascii文本。
+- `.text`是代码段，它用于存储程序指令（程序的代码）。
+- `.data`、`.bss`、`.rodata`是数据段，它们用于存储程序数据。
+- `.bss`是未初始化数据段，`.rodata`是只读数据段。
+- 程序指令+程序数据构成可执行文件。
 
-`objdump -d`的结果中：`Disassembly of section .text`，表示程序指令的内容，以及对应的汇编代码。这里和`objdump -s`的结果对应。`Contents of section .text`里的`554889e5`就对应，`Disassembly of section .text`，里前两行代码`0:   55`和`1:   48 89 e5`。`55（0x55）`反汇编后对应的汇编指令就是`push %rbp`。
+`objdump -s`的结果中：
+
+`Contents of section .text`，每行从第二段开始，表示程序指令的内容（16进制机器指令），后面的`UH............].`是程序指令的ascii文本。
+
+`objdump -d`的结果中：
+
+- `Disassembly of section .text`，表示程序指令的内容，以及对应的汇编代码。这里和`objdump -s`的结果对应。
+- `Contents of section .text`里的`554889e5`，就对应，`Disassembly of section .text`里前两行代码`0:   55`和`1:   48 89 e5`。
+- `55（0x55）`反汇编后对应的汇编指令就是`push %rbp`。
 
 ### hello
 
@@ -506,4 +517,6 @@ Disassembly of section .fini:
   4005cc:       c3                      retq
 ```
 
-从上面三组结果可以看出，c语言程序不是从`main`函数开始的，是从`_start`函数开始的。`_start`函数会调用`__libc_start_main`函数进行一些必要的初始化操作，然后再调用`main`函数。
+从上面三组结果可以看出，c语言程序不是从`main`函数开始的，是从`_start`函数开始的。
+
+`_start`函数会调用`__libc_start_main`函数进行一些必要的初始化操作，然后再调用`main`函数。
