@@ -4,14 +4,13 @@
 
 ### 安装
 
-```
+```shell
 yum -y install vim*
 ```
 
-安装好之后在命令行输入vim可以看见下面这个。
+安装好之后，输入`vim`命令可以看见下面这个。
 
 ```
-> vim
 ~                VIM - Vi IMproved               
 ~                                                
 ~                 version 7.4.629                
