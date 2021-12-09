@@ -34,7 +34,7 @@ gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC)
 
 ### 示例
 
-代码：demo_c/demo/hello/hello.c
+代码：demo_c/demo_linux_c/hello/hello.c
 
 ```shell
 #预处理

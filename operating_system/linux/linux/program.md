@@ -8,9 +8,9 @@
 
 ### 代码和文件
 
-- demo_c/demo/hello/hello.c
-- demo_c/demo/hello/hello.o
-- demo_c/demo/hello/hello
+- demo_c/demo_linux_c/hello/hello.c
+- demo_c/demo_linux_c/hello/hello.o
+- demo_c/demo_linux_c/hello/hello
 
 ### 编译
 

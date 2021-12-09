@@ -4,8 +4,8 @@
 
 ### 代码和文件
 
-- demo_c/demo/fork/fork.c
-- demo_c/demo/fork/fork
+- demo_c/demo_linux_c/fork/fork.c
+- demo_c/demo_linux_c/fork/fork
 
 ### fork-and-exec
 
@@ -39,9 +39,7 @@
 
 而代码段继续共享父进程的物理空间（两者的代码完全相同）。而如果是因为exec，由于两者执行的代码不同，子进程的代码段也会分配单独的物理空间。
 
-### 进程标识
-
-#### pid和ppid
+#### 进程标识pid和ppid
 
 getpid()返回调用进程的pid，getppid()返回调用进程的父进程pid。
 
@@ -49,11 +47,10 @@ getpid()返回调用进程的pid，getppid()返回调用进程的父进程pid。
 
 如果父进程在子进程执行前先跑完了，子进程的ppid就会变成1，这时子进程就变成孤儿进程。1就是系统进程，被1号进程接管有可能就变成后台进程了。
 
-### vfork
+#### vfork
 
 系统方法vfork创建子进程并阻塞父进程，直到子进程退出。而且vfork和fork不一样，vfork创建出来的子进程和父进程共享内存。
 
 vfork这个函数有bug，当代码`return 0`结束或者执行到左后一行结束时，有可能会报`Segmentation fault (core dumped)`错误。但是使用exit(0)或者_exit(0)的时候不会。
 
 通过strace命令追踪可以发现报错时，子进程调用系统函数exit_group(0)退出，但是父进程没有调用系统函数exit_group(0)。不报错时，两个进程都调用系统函数exit_group(0)退出。
-

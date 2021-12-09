@@ -4,10 +4,10 @@
 
 ### 代码和文件
 
-- demo_c/demo/little_endian/little_endian.c
-- demo_c/demo/little_endian/little_endian.o
-- demo_c/demo/little_endian/little_endian
-- demo_c/demo/hello/hello
+- demo_c/demo_linux_c/little_endian/little_endian.c
+- demo_c/demo_linux_c/little_endian/little_endian.o
+- demo_c/demo_linux_c/little_endian/little_endian
+- demo_c/demo_linux_c/hello/hello
 
 ### little_endian.o
 

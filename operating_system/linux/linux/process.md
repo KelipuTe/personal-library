@@ -15,10 +15,10 @@
 
 ### 代码和文件
 
-- demo_c/demo/hello/hello.c
-- demo_c/demo/hello/hello
-- demo_c/demo/system_call_write/system_call_write.c
-- demo_c/demo/system_call_write/system_call_write
+- demo_c/demo_linux_c/hello/hello.c
+- demo_c/demo_linux_c/hello/hello
+- demo_c/demo_linux_c/write/write.c
+- demo_c/demo_linux_c/write/write
 
 ### hello
 
@@ -330,7 +330,7 @@ Linux、Windows、Mac，这些系统它们的底层接口都是不一样的，�
 
 c语言的stdio.h头文件声明的printf函数的底层实现最终调用的就是系统函数write，而write的具体实现就在libc.so.6库里。
 
-系统调用是可以直接写在程序里的。参考代码`demo_c/demo/system_call_write/system_call_write.c`。
+系统调用是可以直接写在程序里的。参考代码`demo_c/demo_linux_c/write/write.c`。
 
 系统函数write就是暴露出来的最底层的函数了，再往下就是驱动和硬件相关了。
 

@@ -10,7 +10,7 @@ readelf命令用于查看elf格式的文件信息。
 
 ### 示例
 
-文件：demo_c/demo/hello/hello
+文件：demo_c/demo_linux_c/hello/hello
 
 `readelf -h hello`
 

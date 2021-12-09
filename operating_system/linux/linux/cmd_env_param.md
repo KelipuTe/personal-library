@@ -4,8 +4,8 @@
 
 ### 代码和文件
 
-- demo_c/demo/cmd_env_param/cmd_env_param.c
-- demo_c/demo/cmd_env_param/cmd_env_param
+- demo_c/demo_linux_c/cmd_env_param/cmd_env_param.c
+- demo_c/demo_linux_c/cmd_env_param/cmd_env_param
 
 ### 示例
 

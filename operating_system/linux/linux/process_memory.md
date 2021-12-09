@@ -6,7 +6,7 @@
 
 ### 代码和文件
 
-- demo_c/demo/hello/hello
+- demo_c/demo_linux_c/hello/hello
 
 ### linux进程内存布局
 
