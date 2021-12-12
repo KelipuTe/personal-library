@@ -6,10 +6,16 @@
 
 - demo_c/demo_linux_c/fork/fork.c
 - demo_c/demo_linux_c/fork/fork
+- demo_c/demo_linux_c/execv/execv01.c
+- demo_c/demo_linux_c/execv/execv01
+- demo_c/demo_linux_c/execv/execv02.c
+- demo_c/demo_linux_c/execv/execv02
+- demo_c/demo_linux_c/nice/nice.c
+- demo_c/demo_linux_c/nice/nice
 
 ### fork-and-exec
 
-#### fork
+### fork
 
 系统函数fork可以创建一个进程（子进程）。系统函数fork通过复制调用进程创建一个新进程，调用进程作为父进程，新进程作为子进程。
 
@@ -54,3 +60,28 @@ getpid()返回调用进程的pid，getppid()返回调用进程的父进程pid。
 vfork这个函数有bug，当代码`return 0`结束或者执行到左后一行结束时，有可能会报`Segmentation fault (core dumped)`错误。但是使用exit(0)或者_exit(0)的时候不会。
 
 通过strace命令追踪可以发现报错时，子进程调用系统函数exit_group(0)退出，但是父进程没有调用系统函数exit_group(0)。不报错时，两个进程都调用系统函数exit_group(0)退出。
+
+### exec
+
+#### execve
+
+在程序里可以使用的和系统函数execve作用相同的函数有好几个，这里用execv举例。代码详见`demo_c/demo_linux_c/execv/execv01.c`和`demo_c/demo_linux_c/execv/execv02.c`。
+
+#### 进程的执行顺序
+
+进程的执行（调度）顺序受到PRI（priority）和NI（nice）值控制，这两个值越小，进程优先级越高。这两个值可以通过`ps -ely`命令查看PRI和NI，也可以通过`top`命令查看PR和NI。
+
+可以使用`nice`和`renice`命令调整进程的优先级。nice的值的范围是-20~19。`nice`用于进程启动之前（`nice - run a program with modified scheduling priority`）。`renice`用于进程启动之后（`renice - alter priority of running processes`）。
+
+在代码中，有getpriority函数可以查看进程优先级，有setpriority函数和nice函数可以调整进程优先级。getpriority和setpriority这两个函数的定义是这样的：
+
+```c
+#include <sys/time.h>
+#include <sys/resource.h>
+​int getpriority(int which, id_t who);
+int setpriority(int which, id_t who, int prio);
+
+// The value which is one of PRIO_PROCESS, PRIO_PGRP, or PRIO_USER, and who is interpreted relative to which (a process identi‐ fier for PRIO_PROCESS, process group identifier for PRIO_PGRP, and a user ID for PRIO_USER). A zero value for who denotes (respectively) the calling process, the process group of the calling process, or the real user ID of the calling process.
+```
+
+这里需要注意的是，which参数选什么，who就要对应的填什么。代码详见`demo_c/demo_linux_c/nice/nice.c`。

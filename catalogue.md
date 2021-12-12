@@ -26,6 +26,7 @@
 - process_memory，进程内存
 - process_control，进程控制
 - process_exit，进程退出
+- process_relation，进程关系
 
 ##### shell，shell脚本
 
