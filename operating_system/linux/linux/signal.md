@@ -68,4 +68,11 @@
 
 进程正在执行系统调用，而且这个系统调用被阻塞。这时来了一个中断信号，结果会有两种。第一种，进程的信号处理函数已经执行返回，这时系统调用会重新开始。第二种，进程的信号处理函数已经执行返回，但是系统调用返回错误，错误码时EINTR。
 
-代码详见：`demo_c/demo_linux_c/signal/sigaction.c`.
+代码详见：`demo_c/demo_linux_c/signal/sigaction.c`。
+
+### 信号屏蔽字和未决集
+
+Signal mask and pending signals
+
+进程可以
+
