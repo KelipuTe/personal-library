@@ -30,7 +30,10 @@
 
 ##### shell，shell脚本
 
+#### windows，windows目录
 
+- bit_torrent，BT种子
+- hosts，hosts文件
 
 ---
 
