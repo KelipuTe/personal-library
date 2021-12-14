@@ -74,5 +74,3 @@
 
 Signal mask and pending signals
 
-进程可以
-
