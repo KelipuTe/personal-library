@@ -8,7 +8,9 @@
 
 IPC（Interprocess Communication，进程间通信）指的是在同一台机器上的不同进程之间传播或交换信息。
 
-ipc的方法主要包括pipe（管道）和ipc对象（消息队列、信号量、共享内存）。管道包括匿名管道和命名管道。ipc对象有两个标准，一个是比较老的"SYSTEM V"标准的消息队列、信号量、共享内存，另一个是POSIX标准的消息队列、信号量、共享内存。
+ipc的方法主要包括pipe（管道）和ipc对象（消息队列、信号量、共享内存）。管道包括匿名管道和命名管道。
+
+ipc对象有两个标准，一个是比较老的"SYSTEM V"标准的消息队列、信号量、共享内存，另一个是POSIX标准的消息队列、信号量、共享内存。
 
 ### 管道
 
@@ -44,7 +46,7 @@ ipc相关linux命令：`ipcs`、`ipcrm`。
 
 消息队列的实现依赖linux内核，并且它的数据存储在内核中。
 
-消息队列相关的文档有`msgget(2)`、`msgctl(2)`、`msgsnd(2)`、`msgrcv(2)`，分别是消息队列创建、消息队列控制、发送消息、接收消息。
+相关的文档有"msgget(2)"、"msgctl(2)"、"msgsnd(2)"、"msgrcv(2)"，分别是消息队列创建、消息队列控制、发送消息、接收消息。
 
 可以通过在linux系统中使用`man 2 msgget`、`man 2 msgctl`、`man 2 msgsnd`、`man 2 msgrcv`命令查看相关文档或者访问在线文档：
 
@@ -68,7 +70,7 @@ ipc相关linux命令：`ipcs`、`ipcrm`。
 
 一般最常用的信号量是二值信号量（0和1），用于进程间同步或是互斥操作。
 
-信号量相关的文档有`sem_overview(7)`、`semget(2)`、`semctl(2)`、`semop(2)`，分别是信号量概述、信号量创建、信号量控制、信号量操作。
+相关的文档有"sem_overview(7)"、"semget(2)"、"semctl(2)"、"semop(2)"，分别是信号量概述、信号量创建、信号量控制、信号量操作。
 
 可以通过在linux系统中使用`man 7 sem_overview`、`man 2 semget`、`man 2 semctl`、`man 2 semop`命令查看相关文档或者访问在线文档：
 
@@ -93,7 +95,7 @@ ipc相关linux命令：`ipcs`、`ipcrm`。
 
 申请一块内存，进程间通过关联这块内存从而达到进程间通信的目的，它是IPC进程间通信中最快的。
 
-信号量相关的文档有`shmget(2)`、`shmop(2)`，分别是共享内存创建、共享内存连接和断开。
+相关的文档有"shmget(2)"、"shmat(2)"、"shmdt(2)"，分别是共享内存创建、共享内存连接、共享内存断开。
 
 可以通过在linux系统中使用`man 2 shmget`、`man 2 shmat`、`man 2 shmdt`命令查看相关文档或者访问在线文档：
 
