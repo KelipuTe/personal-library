@@ -1,5 +1,9 @@
 ## linux文档
 
+2022-01-06
+
+---
+
 可以在linux系统中使用`man`命令或者使用在线文档查看linux相关文档。
 
 `man7.org`（https://man7.org/index.html）
