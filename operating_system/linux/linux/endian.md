@@ -1,20 +1,25 @@
-## 小端字节序（little endian）
+## 字节序
 
 - 2021-12-06
 
 ### 代码和文件
 
-- demo_c/demo_linux_c/little_endian/little_endian.c
-- demo_c/demo_linux_c/little_endian/little_endian.o
-- demo_c/demo_linux_c/little_endian/little_endian
+- demo_c/demo_linux_c/endian/endian.c
+- demo_c/demo_linux_c/endian/endian.o
+- demo_c/demo_linux_c/endian/endian
 - demo_c/demo_linux_c/hello/hello
 
-### little_endian.o
+### 常见字节序
 
-`objdump -s little_endian.o`
+- 小端字节序（little endian），又叫主机字节序。
+- 大端字节序（big endian），又叫网络字节序。
+
+### endian.o
+
+`objdump -s endian.o`
 
 ```
-little_endian.o:     file format elf64-x86-64
+endian.o:     file format elf64-x86-64
 
 Contents of section .text:
  0000 554889e5 4883ec20 897dec8b 45ec8945  UH..H.. .}..E..E
@@ -39,10 +44,10 @@ Contents of section .eh_frame:
  0050 06530c07 08000000                    .S......
 ```
 
-`objdump -d little_endian.o`
+`objdump -d endian.o`
 
 ```
-little_endian.o:     file format elf64-x86-64
+endian.o:     file format elf64-x86-64
 
 
 Disassembly of section .text:
@@ -74,9 +79,15 @@ Disassembly of section .text:
   41:   c3                      retq
 ```
 
-程序中的300和10是存储在`.data`数据段中的。分别对应`2c010000`和`0a000000`。但是300和10的16进制分别是`0000012c`和`0000000a`，这里是反的。这是因为在内存中是使用小端字节序存储的。小端字节序也成为主机字节序。
+程序中的300和10是存储在`.data`数据段中的。分别对应`2c 01 00 00`和`0a 00 00 00`。
 
-c语言的int变量由4个字节组成，每个字节由8个bit位组成。把10进制的300转换成2进制就是`00000000 00000000 00000001 00101100`，左边定义为高位，右边定义为低位。而内存是从低到高的，所以存储格式是把数据的低位放在内存低位上，就变成了`00101100 00000001 00000000 00000000`，转换成16进制就是`2c010000`。
+但是300和10的16进制分别是`00 00 01 2c`和`00 00 00 0a`，这里是反的。这是因为在内存中是使用小端字节序存储的。
+
+c语言的int变量由4个字节组成，每个字节由8个bit位组成。
+
+把10进制的300转换成2进制就是`00000000 00000000 00000001 00101100`，左边定义为高位，右边定义为低位。
+
+而内存是从低到高的，所以存储格式是把数据的低位放在内存低位上，就变成了`00101100 00000001 00000000 00000000`，转换成16进制就是`2c 01 00 00`。
 
 ## hello
 

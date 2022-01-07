@@ -21,17 +21,19 @@ c源码文件通过gcc处理会得到elf可执行文件。gcc处理包括：
 - 汇编（assemble），汇编器，汇编把汇编代码转化为机器指令。
 - 链接（link），连接器，链接把各个模块连接起来组织成为可执行文件。
 
-在链接中，把函数的名字、变量的名字，都称为符号（symbol）
+在链接中，把函数的名字、变量的名字，都称为符号（symbol）。也就是说，源代码中的变量名和方法名，无论长度多少，最终都会转换为符号。
 
 ### hello.o
 
 分别执行：
 
-```shell
+```
 objdump -h hello.o
 objdump -s hello.o
 objdump -d hello.o
 ```
+
+三个命令的结果第1行都会输出`file format elf64-x86-64v`，这个表示文件类型。
 
 `objdump -h hello.o`
 
@@ -56,6 +58,11 @@ Idx Name          Size      VMA               LMA               File off  Algn
                   CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
 ```
 
+- `.text`是代码段，它用于存储程序指令（程序的代码）。
+- `.data`、`.bss`、`.rodata`是数据段，它们用于存储程序数据。
+- `.bss`是未初始化数据段，`.rodata`是只读数据段。
+- 程序指令+程序数据构成可执行文件。
+
 `objdump -s hello.o`
 
 ```
@@ -77,6 +84,8 @@ Contents of section .eh_frame:
  0030 06500c07 08000000                    .P......
 ```
 
+- `Contents of section .text`，每行从第2段开始，表示程序指令的内容（16进制机器指令）。后面的`UH............].`是程序指令的ascii文本。
+
 `objdump -d hello.o`
 
 ```
@@ -95,26 +104,13 @@ Disassembly of section .text:
   14:   c3                      retq
 ```
 
-三个命令的结果都输出了`file format elf64-x86-64v`，这个表示文件类型。
-
-`objdump -h`的结果中：
-
-- `.text`是代码段，它用于存储程序指令（程序的代码）。
-- `.data`、`.bss`、`.rodata`是数据段，它们用于存储程序数据。
-- `.bss`是未初始化数据段，`.rodata`是只读数据段。
-- 程序指令+程序数据构成可执行文件。
-
-`objdump -s`的结果中：
-
-`Contents of section .text`，每行从第二段开始，表示程序指令的内容（16进制机器指令），后面的`UH............].`是程序指令的ascii文本。
-
-`objdump -d`的结果中：
-
-- `Disassembly of section .text`，表示程序指令的内容，以及对应的汇编代码。这里和`objdump -s`的结果对应。
+- `Disassembly of section .text`，表示程序指令的内容，以及对应的汇编代码。这里和`objdump -s hello.o`的结果对应。
 - `Contents of section .text`里的`554889e5`，就对应，`Disassembly of section .text`里前两行代码`0:   55`和`1:   48 89 e5`。
-- `55（0x55）`反汇编后对应的汇编指令就是`push %rbp`。
+- `55`（0x55）反汇编后对应的汇编指令就是`push %rbp`。
 
 ### hello
+
+用同样的方法，看一下可执行文件hello。
 
 `objdump -h hello`
 
@@ -517,6 +513,4 @@ Disassembly of section .fini:
   4005cc:       c3                      retq
 ```
 
-从上面三组结果可以看出，c语言程序不是从`main`函数开始的，是从`_start`函数开始的。
-
-`_start`函数会调用`__libc_start_main`函数进行一些必要的初始化操作，然后再调用`main`函数。
+从上面三组结果可以看出，代码段`Disassembly of section .text`的第1个函数不是`main`函数，而是`_start`函数。`_start`函数会调用`__libc_start_main`函数进行一些必要的初始化操作，然后再调用`main`函数。
