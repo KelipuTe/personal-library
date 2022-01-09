@@ -7,13 +7,9 @@
 ### 代码和文件
 
 - demo_c/demo_linux_c/fork/fork.c
-- demo_c/demo_linux_c/fork/fork
 - demo_c/demo_linux_c/execv/execv.c
-- demo_c/demo_linux_c/execv/execv
 - demo_c/demo_linux_c/execv/call.c
-- demo_c/demo_linux_c/execv/call
 - demo_c/demo_linux_c/nice/nice.c
-- demo_c/demo_linux_c/nice/nice
 
 ### fork-and-exec
 
@@ -73,10 +69,10 @@ vfork()函数有bug，当代码使用`return 0`结束或者执行到最后1行�
 
 #### 进程的执行顺序
 
-进程的执行（调度）顺序受到PRI（priority）和NI（nice）值控制，这两个值越小，进程优先级越高。这两个值可以通过`ps -ely`命令查看（PRI和NI参数），也可以通过`top`命令查看（PR和NI参数）。
+进程的执行（调度）顺序受到PRI（priority）值和NI（nice）值控制，这两个值越小，进程优先级越高。这两个值可以通过`ps -ely`命令查看（PRI和NI参数），也可以通过`top`命令查看（PR和NI参数）。
 
-可以使用`nice`和`renice`命令调整进程的优先级。nice的值的范围是-20~19。`nice`用于进程启动之前（`nice - run a program with modified scheduling priority`）。`renice`用于进程启动之后（`renice - alter priority of running processes`）。
+可以使用`nice`命令和`renice`命令调整进程的优先级。nice的值的范围是-20~19。`nice`命令用于进程启动之前（`nice - run a program with modified scheduling priority`）。`renice`命令用于进程启动之后（`renice - alter priority of running processes`）。
 
-在代码中，有getpriority()函数可以查看进程优先级，有setpriority()函数和nice()函数可以调整进程优先级。具体可以查看linux文档`getpriority(2)`、`setpriority(2)`、`nice(2)`。
+在代码中，getpriority()函数可以查看进程优先级，setpriority()函数和nice()函数可以调整进程优先级。详见linux文档`getpriority(2)`、`setpriority(2)`、`nice(2)`。
 
 这里需要注意的是，getpriority()函数和setpriority()函数的which参数选什么，who就要对应的填什么。代码详见`demo_c/demo_linux_c/nice/nice.c`。

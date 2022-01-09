@@ -7,7 +7,6 @@
 ### 代码和文件
 
 - demo_c/demo_linux_c/cmd_param/cmd_param.c
-- demo_c/demo_linux_c/cmd_param/cmd_param
 
 ### 示例
 

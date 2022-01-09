@@ -27,8 +27,10 @@
 - env_param，环境参数
 - process_memory，进程内存
 - process_control，进程控制
+- signal，信号
 - process_exit，进程退出
 - process_relation，进程关系
+- suid_sgid，特权权限
 
 ##### shell，shell脚本
 

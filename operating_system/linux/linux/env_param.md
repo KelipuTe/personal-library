@@ -7,7 +7,6 @@
 ### 代码和文件
 
 - demo_c/demo_linux_c/env_param/env_param.c
-- demo_c/demo_linux_c/env_param/env_param
 
 ### 示例
 
