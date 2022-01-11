@@ -4,6 +4,8 @@
 
 ---
 
+一定要学会看linux的文档，遇到问题，仔细看看文档，一般都能解决。
+
 可以在linux系统中使用`man`命令或者使用在线文档查看linux相关文档。
 
 `man7.org`（https://man7.org/index.html）

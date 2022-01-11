@@ -1,6 +1,8 @@
 ## 目录（catalogue）
 
-- 2021-11-08
+2021-11-08
+
+---
 
 - 目录的书写格式：`目录绝对路径，目录说明`。
 - 文件的书写格式：`文件名，内容的标题，内容的分类`。
@@ -31,6 +33,16 @@
 - process_exit，进程退出
 - process_relation，进程关系
 - suid_sgid，特权权限
+- ipc，单机进程间通信
+- socket，网络进程间通信
+- io_multiplexing，IO多路复用
+- thread，线程
+- demo_http_server，示例项目：http服务端
+
+参考来源：
+
+- linux文档
+- 51CTO，可用行师，Linux C 核心技术（付费课程、老师讲的很不错、有能力的可以付费学习一波）
 
 ##### shell，shell脚本
 
@@ -40,8 +52,6 @@
 - hosts，hosts文件
 
 ---
-
-
 
 ### 服务端
 
