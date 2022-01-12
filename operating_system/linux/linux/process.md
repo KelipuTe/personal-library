@@ -15,6 +15,8 @@
 - pstree命令
 - strace命令
 
+此外还有`/proc`目录，详见：`proc(5) - process information pseudo-filesystem`。
+
 ### 代码和文件
 
 - demo_c/demo_linux_c/hello/hello.c
