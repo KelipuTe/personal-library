@@ -10,7 +10,7 @@ Socket（套接字），就是对网络中不同主机上的应用进程之间�
 
 套接字（在一些资料里还称为套接口，数据接口）其实就是一个文件，它是套接字文件描述符。文件描述符就是进程已经打开的文件。
 
-详见：
+详见linux文档：
 
 - `socket(7) - Linux socket interface`
 - `ip(7) - Linux IPv4 protocol implementation`
@@ -19,7 +19,7 @@ Socket（套接字），就是对网络中不同主机上的应用进程之间�
 
 TCP（Transmission Control Protocol，传输控制协议），可靠。
 
-详见：`tcp(7) - TCP protocol`。
+详见linux文档：`tcp(7) - TCP protocol`。
 
 示例代码：
 
@@ -107,7 +107,7 @@ sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid 
 
 UDP（User Datagram Protocol，用户数据包协议），不可靠，而且数据报会被重新排序。
 
-详见：`udp(7) - User Datagram Protocol for IPv4`。
+详见linux文档：`udp(7) - User Datagram Protocol for IPv4`。
 
 注意udp服务端不能调用`listen()`、`connect()`、`accept()`函数，因为udp是不建立连接的。
 
@@ -135,7 +135,7 @@ unix socket的类型也有tcp和udp两种，但是unix socket的udp是可靠的�
 
 unix socket还分匿名的和命名的，这两个创建方式不一样，命名的还需要绑定。
 
-详见：`unix(7) - sockets for local interprocess communication`。
+详见linux文档：`unix(7) - sockets for local interprocess communication`。
 
 示例代码：
 

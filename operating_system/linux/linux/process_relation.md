@@ -59,7 +59,7 @@ F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
 - 修改进程的工作目录，一般为根目录。
 - 关闭不必要的文件描述符（0、1、2），打开黑洞文件（`/dev/null`），彻底的断开控制终端。
 
-代码详见`demo_c/demo_linux_c/daemon/daemon.c`。
+代码示例：`demo_c/demo_linux_c/daemon/daemon.c`。
 
 程序运行之后会变成守护进程，不会在终端有输出。可以通过`ps -ely`查看进程状态。
 

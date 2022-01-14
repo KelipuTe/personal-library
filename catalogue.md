@@ -24,6 +24,8 @@
 - linux_man_pages，linux文档
 - program，程序
 - endian，字节序
+- elf，elf文件
+- link，elf文件的链接类型
 - process，进程
 - cmd_param，命令行参数
 - env_param，环境参数

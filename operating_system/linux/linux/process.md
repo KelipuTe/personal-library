@@ -15,7 +15,7 @@
 - pstree命令
 - strace命令
 
-此外还有`/proc`目录，详见：`proc(5) - process information pseudo-filesystem`。
+此外还有`/proc`目录，详见linux文档：`proc(5) - process information pseudo-filesystem`。
 
 ### 代码和文件
 

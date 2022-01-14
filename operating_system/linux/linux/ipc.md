@@ -14,7 +14,7 @@ ipc对象有两个标准，一个是比较老的"SYSTEM V"标准的消息队列�
 
 ### 管道
 
-详见：`pipe(7) - overview of pipes and FIFOs`
+详见linux文档：`pipe(7) - overview of pipes and FIFOs`
 
 管道的实现依赖linux内核。
 
@@ -36,7 +36,7 @@ ipc对象有两个标准，一个是比较老的"SYSTEM V"标准的消息队列�
 
 ### ipc对象
 
-详见：`ipc(2) - System V IPC system calls`。
+详见linux文档：`ipc(2) - System V IPC system calls`。
 
 ipc对象包括消息队列、信号量、共享内存。创建ipc对象时需要指定一个key（键，标识符）。key是指ipc对象在操作系统内部的唯一标识，在多个进程通信时用作关联。
 
@@ -44,7 +44,7 @@ ipc相关的linux命令：`ipcs`、`ipcrm`。
 
 #### 消息队列
 
-详见：`mq_overview(7) - overview of POSIX message queues`。
+详见linux文档：`mq_overview(7) - overview of POSIX message queues`。
 
 消息队列的实现依赖linux内核，并且它的数据存储在内核中。
 
@@ -61,7 +61,7 @@ ipc相关的linux命令：`ipcs`、`ipcrm`。
 
 #### 信号量
 
-详见：`sem_overview(7) - overview of POSIX semaphores`。
+详见linux文档：`sem_overview(7) - overview of POSIX semaphores`。
 
 信号量本质上是个计数器，linux内核有相应的数据结构来维护。
 
@@ -77,7 +77,7 @@ ipc相关的linux命令：`ipcs`、`ipcrm`。
 
 #### 共享内存
 
-详见：`shm_overview(7) - overview of POSIX shared memory`。
+详见linux文档：`shm_overview(7) - overview of POSIX shared memory`。
 
 申请一块内存，进程间通过关联这块内存从而达到进程间通信的目的，它是IPC进程间通信中最快的。
 

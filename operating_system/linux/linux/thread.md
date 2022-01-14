@@ -12,7 +12,7 @@
 
 ### 多线程
 
-详见：`pthreads(7) - POSIX threads`。
+详见linux文档：`pthreads(7) - POSIX threads`。
 
 `main()`函数就是主线程。
 
@@ -20,7 +20,7 @@
 
 ### 互斥锁
 
-详见：`pthread_mutex_lock(3p) - lock and unlock a mutex`。
+详见linux文档：`pthread_mutex_lock(3p) - lock and unlock a mutex`。
 
 互斥锁常用于保护临界区的数据。
 
@@ -28,7 +28,7 @@
 
 ### 条件变量
 
-详见：`pthread_cond_wait(3p) - wait on a condition`。
+详见linux文档：`pthread_cond_wait(3p) - wait on a condition`。
 
 条件变量和需要结合互斥锁使用，互斥锁的存在是为了保护条件变量。
 
