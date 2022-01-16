@@ -8,6 +8,10 @@
 
 - demo_c/demo_linux_c/link/dynamically.c
 - demo_c/demo_linux_c/link/dynamically
+- demo_c/demo_linux_c/link/library.c
+- demo_c/demo_linux_c/link/library.so
+- demo_c/demo_linux_c/link/dynamically_gcc.c
+- demo_c/demo_linux_c/link/dynamically_call.c
 
 ### 动态链接
 
@@ -69,3 +73,23 @@ Program Headers:
 ### 静态链接
 
 如果通过`file`命令可以查看静态链接的elf文件的话，结果中会有`statically linked`。静态链接的程序，会直接从程序的入口地址开始执行。
+
+### 动态库
+
+使用动态库的好处：程序可以以模块的形式独立开发，方便维护和升级。
+
+#### 编写动态库
+
+代码示例：`demo_c/demo_linux_c/link/library.c`。
+
+编码完成后使用`gcc -fPIC -shared library.c -o library.so`命令，编译成动态库。
+
+#### 编译时链接动态库
+
+代码示例：`demo_c/demo_linux_c/link/dynamically_gcc.c`。
+
+编码完成后使用`gcc dynamically_gcc.c ./library.so -o dynamically_gcc`命令，在编译时连接动态库。
+
+#### 程序中显示调用动态库
+
+代码示例：`demo_c/demo_linux_c/link/dynamically_call.c`。
