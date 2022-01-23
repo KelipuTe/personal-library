@@ -9,6 +9,10 @@
 - 文件可以拆分成多个，使用名字+编号命名。
 - 分类可写可不写，多个分类用顿号（、）隔开。
 
+### backup，备份目录
+
+这个目录和知识库无关，目录里面是本人backup文件夹的目录说明文档。
+
 ### operating_system，操作系统目录
 
 #### linux，linux目录
@@ -50,8 +54,11 @@
 
 #### windows，windows目录
 
-- bit_torrent，BT种子
-- hosts，hosts文件
+| 文件名 | 描述 | 分类 | 更新时间 |
+| --- | --- | --- | --- |
+| bit_torrent.md | BT种子 | 下载 | 2020-08-17 |
+| hosts.md | hosts文件 | windows、配置 | 2020-08-17 |
+| win10_to_win11.md | win10升级win11 | windows、升级 | 2022-01-21 |
 
 ### zhe2xue2，哲学目录
 
