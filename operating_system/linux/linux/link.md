@@ -1,9 +1,5 @@
 ## 动态链接和静态链接
 
-2022-01-14
-
----
-
 ### 代码和文件
 
 - demo_c/demo_linux_c/link/dynamically.c

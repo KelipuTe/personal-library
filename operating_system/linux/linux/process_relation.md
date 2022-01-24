@@ -1,9 +1,5 @@
 ## 进程关系
 
-2021-12-11
-
----
-
 ### 代码和文件
 
 - demo_c/demo_linux_c/daemon/daemon.c

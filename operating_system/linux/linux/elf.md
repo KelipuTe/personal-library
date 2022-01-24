@@ -1,9 +1,5 @@
 ## ELF
 
-2022-01-14
-
----
-
 ### 代码和文件
 
 - demo_c/demo_linux_c/endian/endian.c

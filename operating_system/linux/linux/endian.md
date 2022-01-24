@@ -1,9 +1,5 @@
 ## 字节序
 
-2021-12-06
-
----
-
 ### 代码和文件
 
 - demo_c/demo_linux_c/endian/endian.c

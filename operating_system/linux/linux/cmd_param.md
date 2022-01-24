@@ -1,9 +1,5 @@
 ## 命令行参数
 
-2021-12-07
-
----
-
 ### 代码和文件
 
 - demo_c/demo_linux_c/cmd_param/cmd_param.c

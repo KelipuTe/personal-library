@@ -1,9 +1,5 @@
 ## SUID和SGID
 
-2021-12-11
-
----
-
 `etc/shadow`文件用于记录linux上所有用户的账号和密码。只有超级管理员有读写权限，普通用户是没有读写权限的。但是普通用户可以通过`passwd`命令修改自己的密码。
 
 这是因为`/bin/passwd`文件的权限是`rwsr-xr-x`。`rwsr-xr-x`表示，user=rws，group=r-x，other=r-x。可以注意到user的执行权限位上是s，这称为特权权限（Set User ID，SUID）。如果group的执行权限位上是s，就是（Set Group ID，SGID）。

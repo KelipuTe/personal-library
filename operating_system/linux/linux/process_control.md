@@ -1,9 +1,5 @@
 ## 进程控制
 
-2021-12-07
-
----
-
 ### 代码和文件
 
 - demo_c/demo_linux_c/fork/fork.c
