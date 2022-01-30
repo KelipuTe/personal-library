@@ -1,52 +1,28 @@
 ## windows环境安装和配置golang
 
-- 2021-11-17
-- windows10
-- go-1.17
-
 ### 下载
 
-去官方网站（https://golang.org/dl），下一个windows环境的安装包。
-
-本人这里下载到的安装包叫go1.17.3.windows-amd64.msi。
-
-上面的网站打不开就用这个网站（https://golang.google.cn/dl）。
+去官方网站（https://golang.org/dl）下一个windows环境的安装包，官方网站打不开就用这个网站（https://golang.google.cn/dl）。这里下载到的安装包是1.17版本的`go1.17.3.windows-amd64.msi`。
 
 ### 安装
 
-运行安装包，选个合适的安装目录，然后一路下一步即可。
+这里用的是windows11环境，直接运行安装包，选个合适的安装目录，然后一路下一步即可。
 
 ### 配置
 
-- 在桌面右击我的电脑找到属性并点击。
-- 在界面左侧找到高级系统设置并点击。
-- 在界面下面找到环境变量并点击。
-- 在界面的系统变量列表中找到path变量并点击编辑。
-- 在path变量中添加go的bin目录。
-- 本人的这个目录是`C:\go\bin`。
-
-环境变量GOPATH在上面安装的时候已经配置好了，如果没有的话需要自行配置。
+桌面->我的电脑->鼠标右击->属性->高级系统设置->环境变量->系统变量->path->编辑->添加go安装目录下的bin目录的路径。这里这个目录是`C:\go\bin`。
 
 ### go版本
 
-#### go version
-
-可以在win10的命令行窗口（cmd黑窗口），使用`go version`命令查看go版本信息。
-
-如果上面的安装步骤成功，则会输出go版本号。
-
-```
-> C:\Users\Administrator>go version
-go version go1.17.3 windows/amd64
-```
+可以在windows的命令行窗口（cmd），使用`go version`命令查看go版本信息。安装步骤成功，则会输出go版本号：`go version go1.17.3 windows/amd64`。
 
 ### 环境配置
 
-- `go env`命令输出当前go开发包的环境变量状态。
-- `go env -w`命令用于设置go开发包的环境变量。
+- 命令`go env`，输出当前go开发包的环境变量状态。
+- 命令`go env -w`，设置go开发包的环境变量。
 
 ```
-> C:\Users\Administrator>go env
+> go env
 set GO111MODULE=
 set GOARCH=amd64
 set GOBIN=
@@ -86,11 +62,13 @@ set PKG_CONFIG=pkg-config
 set GOGCCFLAGS=-m64 -mthreads -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=C:\Users\ADMINI~1\AppData\Local\Temp\go-build1826627288=/tmp/go-build -gno-record-gcc-switches
 ```
 
-- GOARCH：处理器架构
-- GOROOT：go开发包的安装目录
-- GOPATH：当前工作目录，建议不要设置全局的GOPATH，而是随项目设置GOPATH
-- GOPROXY：代理
-- GOPRIVATE：私有库，不走代理
+- GOARCH：处理器架构。
+- GOROOT：go开发包的安装目录。
+- GOPATH：当前工作目录，在安装的时候会配置默认的。建议不要全局设置，而是随项目设置。
+- GOPROXY：代理。
+- GOPRIVATE：私有库，不走代理。
+
+### 代理
 
 受网络影响，默认的代理可能连不上，可以换七牛云的代理。使用下面的命令设置代理：
 

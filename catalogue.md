@@ -67,6 +67,14 @@
 | hosts.md | hosts文件 | 配置 | 2020-08-17 |
 | win10_to_win11.md | win10升级win11 | 升级 | 2022-01-21 |
 
+### service_technology，服务端技术
+
+#### go，golang
+
+| 文件名 | 描述 | 分类 | 更新时间 |
+| --- | --- | --- | --- |
+| windows.md | windows环境安装和配置golang | go | 2021-11-17 |
+
 ### zhe2xue2，哲学
 
 #### xue2xi2，学习
