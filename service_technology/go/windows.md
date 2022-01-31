@@ -1,4 +1,4 @@
-## windows环境安装和配置golang
+## windows环境安装和配置golang开发环境
 
 ### 下载
 
@@ -12,7 +12,7 @@
 
 桌面->我的电脑->鼠标右击->属性->高级系统设置->环境变量->系统变量->path->编辑->添加go安装目录下的bin目录的路径。这里这个目录是`C:\go\bin`。
 
-### go版本
+### 验证
 
 可以在windows的命令行窗口（cmd），使用`go version`命令查看go版本信息。安装步骤成功，则会输出go版本号：`go version go1.17.3 windows/amd64`。
 

@@ -69,11 +69,17 @@
 
 ### service_technology，服务端技术
 
+#### c，C语言
+
+| 文件名 | 描述 | 分类 | 更新时间 |
+| --- | --- | --- | --- |
+| windows.md | windows环境配置c语言开发环境 | - | 2021-12-01 |
+
 #### go，golang
 
 | 文件名 | 描述 | 分类 | 更新时间 |
 | --- | --- | --- | --- |
-| windows.md | windows环境安装和配置golang | go | 2021-11-17 |
+| windows.md | windows环境安装和配置golang开发环境 | - | 2021-11-17 |
 
 ### zhe2xue2，哲学
 
