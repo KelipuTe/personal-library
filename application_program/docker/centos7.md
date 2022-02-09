@@ -1,6 +1,8 @@
 ## centos7
 
-- 2021-12-07
+```
+docker pull centos:centos7
+```
 
 ### 路径映射
 
