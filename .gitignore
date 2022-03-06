@@ -1,4 +1,9 @@
+# idea 全家桶的配置目录
 .idea/
-TuPian/
-tu2pian4/
-Image/
+# visual studio code 的配置目录
+.vscode/
+
+# 各种类型的图片
+*.jpg
+*.jpeg
+*.png
