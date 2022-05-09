@@ -2,8 +2,3 @@
 .idea/
 # visual studio code 的配置目录
 .vscode/
-
-# 各种类型的图片
-*.jpg
-*.jpeg
-*.png
